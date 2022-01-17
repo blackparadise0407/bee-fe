@@ -12,5 +12,9 @@ export const HomeRoutes: RouteObject = {
             <MainLayout />
         </ProtectedRoute>
     ),
-    children: [{ index: true, element: <HomePage /> }],
+    children: [
+        { index: true, element: <HomePage /> },
+        { path: '/trendings', element: <HomePage /> },
+        { path: '/feed', element: <HomePage /> },
+    ],
 }
