@@ -19,3 +19,7 @@ img {
 a {
     text-decoration: none;
 }
+
+input {
+    font-family: 'Nunito', sans-serif;
+}
