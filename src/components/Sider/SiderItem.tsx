@@ -52,7 +52,7 @@ export function SiderItem({
                         </AnimatePresence>
                         <span
                             className={clsx(
-                                'text-gray-500 text-lg mr-2 group-hover:text-white',
+                                'text-gray-500 text-lg group-hover:text-white transition-colors',
                                 isActive && 'text-white',
                             )}
                         >
@@ -60,7 +60,7 @@ export function SiderItem({
                         </span>
                         <span
                             className={clsx(
-                                'text-gray-500 text-sm font-semibold group-hover:text-white',
+                                'ml-2 text-gray-500 text-sm font-semibold group-hover:text-white transition-colors',
                                 isActive && 'text-white',
                             )}
                         >

@@ -1,4 +1,4 @@
-import { avatarPlaceholder } from '@/assets/images'
+import { avatarPlaceholder } from '@bee/assets/images'
 import { Fragment } from 'react'
 import { BiLogOut } from 'react-icons/bi'
 import {
@@ -17,12 +17,7 @@ import {
     HiOutlineStar,
     HiStar,
 } from 'react-icons/hi'
-import {
-    RiCompassFill,
-    RiCompassLine,
-    RiMenuFoldLine,
-    RiMenuUnfoldLine,
-} from 'react-icons/ri'
+import { RiCompassFill, RiCompassLine, RiMenuFoldLine } from 'react-icons/ri'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 import { FlexGrow } from '..'

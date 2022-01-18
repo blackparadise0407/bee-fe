@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-import { Sider } from '@/components'
+import { Player, Sider } from '@bee/components'
 
 export default function MainLayout() {
     return (
@@ -8,8 +8,11 @@ export default function MainLayout() {
             <div className="fixed top-0 bottom-0 w-[260px]">
                 <Sider />
             </div>
-            <main className="ml-[260px] bg-primary-selago h-full">
+            <main className="relative ml-[260px] bg-primary-selago h-full">
                 <Outlet />
+                <div className="absolute w-[calc(100%-320px)] bottom-0 p-5">
+                    <Player />
+                </div>
             </main>
         </div>
     )
