@@ -1,37 +1,36 @@
-import { HTMLProps, useEffect, useRef, useState } from 'react'
+import { HTMLProps, useCallback, useEffect, useRef, useState } from 'react'
 
 import './style.css'
 
-export default function RangeInput({ ...rest }: HTMLProps<HTMLInputElement>) {
+export default function RangeInput({
+    value,
+    ...rest
+}: HTMLProps<HTMLInputElement>) {
     const inputRef = useRef<HTMLInputElement>(null)
     const [progress, setProgress] = useState('')
 
-    const handleInputChange = () => {
+    const handleInputChange = useCallback(() => {
         const target = inputRef.current
         if (target) {
-            const min = parseInt(target.min)
-            const max = parseInt(target.max)
-            const val = parseInt(target.value)
-            setProgress(((val - min) * 100) / (max - min) + '% 100%')
+            const min = parseFloat(target.min)
+            const max = parseFloat(target.max)
+            const val = parseFloat(value as string)
+            const delta = max - min || 1
+            setProgress(((val - min) * 100) / delta + '% 100%')
         }
-    }
+    }, [value])
 
     useEffect(() => {
         handleInputChange()
-
-        const currentRef = inputRef.current
-        currentRef?.addEventListener('input', handleInputChange)
-        return () => {
-            currentRef?.removeEventListener('input', handleInputChange)
-        }
-    }, [])
+    }, [value])
 
     return (
         <input
             style={{ backgroundSize: progress }}
             ref={inputRef}
-            {...rest}
+            value={value}
             type="range"
+            {...rest}
         />
     )
 }
