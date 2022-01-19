@@ -5,6 +5,15 @@ input[type='range'] {
     border-radius: 5px;
     background-image: linear-gradient(#000, #000);
     background-repeat: no-repeat;
+    transition: height ease 0.1s;
+}
+
+input[type='range']:focus {
+    outline: none;
+}
+
+input[type='range']:hover {
+    height: 6px;
 }
 
 /* Input Thumb */
@@ -17,5 +26,10 @@ input[type='range']::-webkit-slider-thumb {
     cursor: ew-resize;
     border: 2px solid #000;
     box-shadow: 0 0 2px 0 #555;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, height ease 0.1s, width ease 0.1s;
+}
+
+input[type='range']:hover::-webkit-slider-thumb {
+    height: 15px;
+    width: 15px;
 }
