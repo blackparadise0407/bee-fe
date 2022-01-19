@@ -6,7 +6,7 @@ export default function HomePage() {
             <div className="px-8 py-5 flex-grow">
                 <Navigation />
             </div>
-            <div className="px-8 py-5 w-[320px]"></div>
+            <div className="px-8 py-5 invisible xl:visible w-[320px]"></div>
         </div>
     )
 }

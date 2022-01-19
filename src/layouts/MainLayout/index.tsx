@@ -10,7 +10,7 @@ export default function MainLayout() {
             </div>
             <main className="relative ml-[260px] bg-primary-selago h-full">
                 <Outlet />
-                <div className="absolute w-[calc(100%-320px)] bottom-0 p-5">
+                <div className="absolute w-full xl:w-[calc(100%-320px)] bottom-0 p-5">
                     <Player />
                 </div>
             </main>
