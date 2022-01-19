@@ -16,6 +16,7 @@ import {
 } from 'react-icons/hi'
 import { IoRepeatOutline, IoShuffleOutline } from 'react-icons/io5'
 import { RiHeart2Line, RiPlayListLine } from 'react-icons/ri'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 import { audio } from '@bee/assets/audios'
 import { fmtMSS } from '@bee/utils/common'
@@ -28,6 +29,23 @@ export default memo(function Player() {
     const [currentTime, setCurrentTime] = useState(0)
     const [volume, setVolume] = useState(1)
     const [isInterruptDragging, setIsInterruptDragging] = useState(false)
+
+    useHotkeys('space', () => {
+        handleTogglePlay()
+    })
+
+    useHotkeys('ctrl+m', () => {
+        handleToggleMute()
+    })
+
+    const handleToggleMute = useCallback(() => {
+        const current = audioRef.current
+        if (current) {
+            current.volume === 0
+                ? (current.volume = volume)
+                : (current.volume = 0)
+        }
+    }, [volume])
 
     const handleLoadedMetadata = useCallback(
         (e: ChangeEvent<HTMLAudioElement>) => {
@@ -173,6 +191,7 @@ export default memo(function Player() {
                         step={0.1}
                         min={0}
                         max={1}
+                        tabIndex={-1}
                     />
                     <WithEffectButton>
                         <HiOutlineVolumeUp
@@ -192,6 +211,7 @@ export default memo(function Player() {
                     onMouseDown={onChangeCurrentTimeEnd}
                     min={0}
                     max={duration}
+                    tabIndex={-1}
                 />
                 <span>{fmtMSS(duration)}</span>
             </div>
