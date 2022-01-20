@@ -1,3 +1,4 @@
 import avatarPlaceholder from './avatar-placeholder.png'
+import banner from './banner.jpg'
 
-export { avatarPlaceholder }
+export { banner, avatarPlaceholder }
