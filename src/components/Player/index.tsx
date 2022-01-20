@@ -18,7 +18,7 @@ import { IoRepeatOutline, IoShuffleOutline } from 'react-icons/io5'
 import { RiHeart2Line, RiPlayListLine } from 'react-icons/ri'
 import { useHotkeys } from 'react-hotkeys-hook'
 
-import { audio } from '@bee/assets/audios'
+import { HPM } from '@bee/assets/audios'
 import { fmtMSS } from '@bee/utils/common'
 import { RangeInput, WithEffectButton } from '..'
 
@@ -29,6 +29,7 @@ export default memo(function Player() {
     const [currentTime, setCurrentTime] = useState(0)
     const [volume, setVolume] = useState(1)
     const [isInterruptDragging, setIsInterruptDragging] = useState(false)
+    const [isMuted, setIsMuted] = useState(false)
 
     useHotkeys('space', () => {
         handleTogglePlay()
@@ -41,9 +42,10 @@ export default memo(function Player() {
     const handleToggleMute = useCallback(() => {
         const current = audioRef.current
         if (current) {
-            current.volume === 0
-                ? (current.volume = volume)
-                : (current.volume = 0)
+            setIsMuted((isMuted) => {
+                isMuted ? (current.volume = volume) : (current.volume = 0)
+                return !isMuted
+            })
         }
     }, [volume])
 
@@ -56,6 +58,7 @@ export default memo(function Player() {
                     target.volume = prev
                     return prev
                 })
+                setIsMuted(!target.volume)
             }
         },
         [],
@@ -100,22 +103,6 @@ export default memo(function Player() {
             setVolume(value)
         }
     }
-
-    const handleVolumeClick = useCallback(
-        (inc = false) => {
-            const res = inc
-                ? parseFloat((volume + 0.1).toFixed(1))
-                : parseFloat((volume - 0.1).toFixed(1))
-            if (res < 0 || res > 1) {
-                return
-            }
-            if (audioRef.current) {
-                audioRef.current.volume = res
-            }
-            setVolume(res)
-        },
-        [volume],
-    )
 
     useEffect(() => {
         if (audioRef.current) {
@@ -180,24 +167,25 @@ export default memo(function Player() {
                 </div>
                 <div className="flex flex-1 items-center text-xl text-gray-500 justify-end ml-auto">
                     <WithEffectButton>
-                        <HiOutlineVolumeOff
-                            onClick={() => handleVolumeClick(false)}
-                        />
+                        <span>
+                            {isMuted || volume === 0 ? (
+                                <HiOutlineVolumeOff
+                                    onClick={handleToggleMute}
+                                />
+                            ) : (
+                                <HiOutlineVolumeUp onClick={handleToggleMute} />
+                            )}
+                        </span>
                     </WithEffectButton>
                     <RangeInput
                         className="w-[90px] mx-3"
-                        value={volume}
+                        value={isMuted ? 0 : volume}
                         onChange={handleVolumeChange}
                         step={0.1}
                         min={0}
                         max={1}
                         tabIndex={-1}
                     />
-                    <WithEffectButton>
-                        <HiOutlineVolumeUp
-                            onClick={() => handleVolumeClick(true)}
-                        />
-                    </WithEffectButton>
                 </div>
             </div>
             <div className="flex items-center text-sm font-semibold">
@@ -217,7 +205,7 @@ export default memo(function Player() {
             </div>
             <audio
                 ref={audioRef}
-                src={audio}
+                src={HPM}
                 onLoadedMetadata={handleLoadedMetadata}
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={() => setIsPlaying(false)}
