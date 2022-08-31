@@ -18,7 +18,6 @@ import { IoRepeatOutline, IoShuffleOutline } from 'react-icons/io5'
 import { RiHeart2Line, RiPlayListLine } from 'react-icons/ri'
 import { useHotkeys } from 'react-hotkeys-hook'
 
-import { HPM } from '@bee/assets/audios'
 import { fmtMSS } from '@bee/utils/common'
 import { RangeInput, WithEffectButton } from '..'
 
@@ -205,7 +204,7 @@ export default memo(function Player() {
             </div>
             <audio
                 ref={audioRef}
-                src={HPM}
+                // src={HPM}
                 onLoadedMetadata={handleLoadedMetadata}
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={() => setIsPlaying(false)}

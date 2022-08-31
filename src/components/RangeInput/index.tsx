@@ -22,7 +22,7 @@ export default function RangeInput({
 
     useEffect(() => {
         handleInputChange()
-    }, [value])
+    }, [value, handleInputChange])
 
     return (
         <input
