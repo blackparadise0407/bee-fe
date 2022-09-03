@@ -38,7 +38,7 @@ export default memo(function Player() {
         handleToggleMute()
     })
 
-    const handleToggleMute = useCallback(() => {
+    const handleToggleMute = () => {
         const current = audioRef.current
         if (current) {
             setIsMuted((isMuted) => {
@@ -46,54 +46,48 @@ export default memo(function Player() {
                 return !isMuted
             })
         }
-    }, [volume])
+    }
 
-    const handleLoadedMetadata = useCallback(
-        (e: ChangeEvent<HTMLAudioElement>) => {
-            const target = audioRef.current
-            setDuration(Math.round(e.target.duration))
-            if (target) {
-                setVolume((prev) => {
-                    target.volume = prev
-                    return prev
-                })
-                setIsMuted(!target.volume)
-            }
-        },
-        [],
-    )
+    const handleLoadedMetadata = (e: ChangeEvent<HTMLAudioElement>) => {
+        const target = audioRef.current
+        setDuration(Math.round(e.target.duration))
+        if (target) {
+            setVolume((prev) => {
+                target.volume = prev
+                return prev
+            })
+            setIsMuted(!target.volume)
+        }
+    }
 
-    const handleTimeUpdate = useCallback((e: ChangeEvent<HTMLAudioElement>) => {
+    const handleTimeUpdate = (e: ChangeEvent<HTMLAudioElement>) => {
         setCurrentTime(Math.round(e.target.currentTime))
-    }, [])
+    }
 
-    const handleTogglePlay = useCallback(() => {
+    const handleTogglePlay = () => {
         setIsPlaying((prev) => !prev)
-    }, [])
+    }
 
-    const handleChangeCurrentTime = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            if (audioRef.current) {
-                if (isPlaying) {
-                    setIsPlaying(false)
-                    audioRef.current.pause()
-                    setIsInterruptDragging(true)
-                }
-                const value = parseInt(e.target.value)
-                audioRef.current.currentTime = value
-                setCurrentTime(value)
+    const handleChangeCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                setIsPlaying(false)
+                audioRef.current.pause()
+                setIsInterruptDragging(true)
             }
-        },
-        [isPlaying],
-    )
+            const value = parseInt(e.target.value)
+            audioRef.current.currentTime = value
+            setCurrentTime(value)
+        }
+    }
 
-    const onChangeCurrentTimeEnd = useCallback(() => {
+    const onChangeCurrentTimeEnd = () => {
         if (isInterruptDragging) {
             setIsPlaying(true)
             setIsInterruptDragging(false)
             audioRef.current?.play()
         }
-    }, [isInterruptDragging])
+    }
 
     const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (audioRef.current) {
@@ -105,17 +99,19 @@ export default memo(function Player() {
 
     useEffect(() => {
         if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.play()
-            } else {
-                audioRef.current.pause()
+            const playPromise = audioRef.current.play()
+            if (playPromise) {
+                playPromise
+                    .then((_) => {
+                        !isPlaying && audioRef.current?.pause()
+                    })
+                    .catch((_) => {})
             }
         }
     }, [isPlaying])
 
     useEffect(() => {
         const curr = audioRef.current
-        // Pause and clean up on unmount
         return () => {
             if (curr) {
                 curr.pause()
@@ -204,7 +200,7 @@ export default memo(function Player() {
             </div>
             <audio
                 ref={audioRef}
-                // src={HPM}
+                src="https://mp3-s1-m-zmp3.zmdcdn.me/aa67f5643925d07b8934/8892491565885937214?authen=exp=1662357528~acl=/aa67f5643925d07b8934/*~hmac=f65ba20f0264f591fa69e515464f7fac"
                 onLoadedMetadata={handleLoadedMetadata}
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={() => setIsPlaying(false)}
