@@ -31,7 +31,7 @@ export default function HomePage() {
                 >
                     <div className="flex flex-col">
                         <span>Artist</span>
-                        <div className="flex flex-col font-bold text-3xl">
+                        <div className="flex flex-col font-bold text-3xl text-white">
                             <span>On Top</span>
                             <span>Of The World</span>
                         </div>
