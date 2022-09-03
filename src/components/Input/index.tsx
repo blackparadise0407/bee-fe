@@ -1,11 +1,11 @@
-import { HTMLProps, memo, ReactNode } from 'react'
 import clsx from 'clsx'
+import { HTMLProps, memo, ReactNode } from 'react'
 
 type InputProps = {
     className?: string
     icon?: ReactNode
     fullWidth?: boolean
-    onIconClick?: (value: any) => void
+    onIconClick?: (value: string) => void
     inputProps?: HTMLProps<HTMLInputElement>
 }
 
@@ -17,7 +17,7 @@ export default memo(function Input({
     inputProps,
 }: InputProps) {
     const handleIconClick = () => {
-        onIconClick(inputProps?.value)
+        onIconClick(inputProps?.value as string)
     }
 
     return (

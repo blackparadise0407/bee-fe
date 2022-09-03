@@ -1,11 +1,5 @@
-import {
-    ChangeEvent,
-    memo,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react'
+import { ChangeEvent, memo, useEffect, useRef, useState } from 'react'
+import { useHotkeys } from 'react-hotkeys-hook'
 import {
     HiFastForward,
     HiOutlineVolumeOff,
@@ -16,9 +10,9 @@ import {
 } from 'react-icons/hi'
 import { IoRepeatOutline, IoShuffleOutline } from 'react-icons/io5'
 import { RiHeart2Line, RiPlayListLine } from 'react-icons/ri'
-import { useHotkeys } from 'react-hotkeys-hook'
 
 import { fmtMSS } from '@bee/utils/common'
+
 import { RangeInput, WithEffectButton } from '..'
 
 export default memo(function Player() {

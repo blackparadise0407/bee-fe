@@ -1,8 +1,8 @@
+import clsx from 'clsx'
+import { useCallback, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { Player, Sider } from '@bee/components'
-import { useCallback, useState } from 'react'
-import clsx from 'clsx'
 import { HandleCollapseFn } from '@bee/components/Sider'
 
 export default function MainLayout() {

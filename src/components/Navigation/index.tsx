@@ -1,11 +1,11 @@
-import {} from 'react-icons/ai'
 import { HiArrowRight, HiArrowLeft } from 'react-icons/hi'
 import { RiSearch2Line } from 'react-icons/ri'
+
 import { Input } from '..'
 
-type NavigationProps = {}
+// type NavigationProps = {}
 
-export default function Navigation({}: NavigationProps) {
+export default function Navigation() {
     return (
         <div className="flex items-center">
             <div className="flex space-x-5">

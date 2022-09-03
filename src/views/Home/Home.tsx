@@ -1,6 +1,7 @@
+import { BiChevronRight } from 'react-icons/bi'
+
 import { banner } from '@bee/assets/images'
 import { Navigation } from '@bee/components'
-import { BiChevronRight } from 'react-icons/bi'
 
 export default function HomePage() {
     return (
@@ -10,7 +11,7 @@ export default function HomePage() {
                 <div className="flex justify-between items-end mt-5">
                     <div className="flex flex-col">
                         <span className="text-sm text-gray-500">
-                            What's hot 🔥
+                            What&apos;s hot 🔥
                         </span>
                         <span className="font-bold text-3xl tracking-wide">
                             Trending

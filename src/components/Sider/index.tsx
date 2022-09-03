@@ -1,5 +1,6 @@
-import { avatarPlaceholder } from '@bee/assets/images'
+import clsx from 'clsx'
 import { Fragment } from 'react'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
 import {
     HiCalendar,
@@ -18,12 +19,12 @@ import {
     HiStar,
 } from 'react-icons/hi'
 import { RiCompassFill, RiCompassLine, RiMenuFoldLine } from 'react-icons/ri'
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
+
+import { avatarPlaceholder } from '@bee/assets/images'
 
 import { FlexGrow } from '..'
 import { SiderItem, SiderItemProps } from './SiderItem'
-import { Link } from 'react-router-dom'
-import clsx from 'clsx'
 
 export interface HandleCollapseFn {
     (collapsed: boolean): void

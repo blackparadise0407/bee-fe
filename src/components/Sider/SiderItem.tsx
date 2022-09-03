@@ -1,7 +1,8 @@
-import { memo, ReactElement, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { NavLink, NavLinkProps } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import { memo, ReactElement, useRef, useState } from 'react'
+import { NavLink, NavLinkProps } from 'react-router-dom'
+
 import { useEventListener } from '@bee/hooks/useEventListener'
 
 export type SiderItemProps = Omit<NavLinkProps, 'to' | 'children'> & {
