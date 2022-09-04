@@ -195,8 +195,11 @@ export default memo(function Player() {
             <audio
                 ref={audioRef}
                 src="https://mp3-s1-m-zmp3.zmdcdn.me/aa67f5643925d07b8934/8892491565885937214?authen=exp=1662357528~acl=/aa67f5643925d07b8934/*~hmac=f65ba20f0264f591fa69e515464f7fac"
+                // eslint-disable-next-line react/no-unknown-property
                 onLoadedMetadata={handleLoadedMetadata}
+                // eslint-disable-next-line react/no-unknown-property
                 onTimeUpdate={handleTimeUpdate}
+                // eslint-disable-next-line react/no-unknown-property
                 onEnded={() => setIsPlaying(false)}
             />
         </div>
